@@ -8,9 +8,15 @@ Recent advances in generative frameworks have shifted Relation Extraction (RE) t
 ### Bridging the Data Gap: A Comprehensive Review of Datasets for Low-Resource Relation and Triplet Extraction
 Generative frameworks are redefining Information Extraction (IE), recasting it from Relation Extraction (RE) into open-schema Triplet Extraction (TE); the direct generation of *(subject, predicate, object)* triples. This progression, however, presents significant evaluation challenges in low-resource scenarios, where annotated data and supporting resources are scarce. This survey addresses this gap by providing a comprehensive assessment of existing benchmarks for evaluating RE and TE under these constrained conditions. A core contribution is the systematic summary of relevant datasets, ranging from standardized benchmarks to those designed for domain-specific and multilingual challenges. The survey details how these resources are applied and transformed for low-resource settings, including their use in adversarial learning and task-reformulation strategies. By mapping the landscape of available resources and methodologies, this work aims to guide future research toward more robust and reproducible progress in low-resource IE.
 
+## Keywords
+- Information Extraction 
+- Relation Extraction 
+- Triplet Extraction
+- Low-resources
+
 
 ## Research strategy 
-This semi-systematic literature review follows the methodology outlined by * *, focusing on three key research questions about Relation Extraction (RE) and Triplet Extraction (TE) in low-resource scenarios.
+This semi-systematic literature review follows the methodology outlined by *Guidelines for performing systematic literature reviews in software engineering*[^1], focusing on three key research questions about Relation Extraction (RE) and Triplet Extraction (TE) in low-resource scenarios.
 
 ### Search Approach
 - **Strategy A**: Search with two-term queries only in title
@@ -53,7 +59,7 @@ Studies were selected based on relevance to NLP/ RE/ TE, focus on low-resource s
 
 ### Project Files
 
-- **`research_methodology.xlsx`**: Contains the work planning according to the paper's *keele2007guidelines* strategy, as described in the research methodology section of each paper.
+- **`research_methodology.xlsx`**: Contains the work planning according to the paper's *Guidelines for performing systematic literature reviews in software engineering*[^1] strategy, as described in the research methodology section of each paper.
 - **`queries.csv`**: Contains all search queries used in the study.
 - **`summary.csv`** & **`summary.xlsx`**: Contain the combined results from Web of Science and Scopus for queries ('q31','q32','q33','q34','q46','q47','q48','q49','q61','q62','q63','q64') after removing duplicates between platforms. Provided in both CSV and Excel formats.
 - **`summary_reduced.csv`** & **`summary_reduced.xlsx`**: Contain the refined results from the same query set after applying inclusion/exclusion criteria and removing duplicates between platforms. Provided in both CSV and Excel formats.
@@ -63,6 +69,7 @@ Studies were selected based on relevance to NLP/ RE/ TE, focus on low-resource s
 
 > **Development Note:** This code was developed and run in a local environment. The repository contains the code as exported from that environment without subsequent execution here.
 
+[^1]: Keele, S. (2007). Guidelines for performing systematic literature reviews in software engineering (Vol. 5). Technical report, ver. 2.3 ebse technical report. ebse.
 
 ## Declaration of competing interest
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
