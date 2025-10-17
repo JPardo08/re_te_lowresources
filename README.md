@@ -1,37 +1,67 @@
 # Relation Extraction (RE) and Triplet Extraction (TE) in Low-resource scenarios. 
 
+## Abstracts
 
-## From Relation Extraction to Triplet Extraction: A Survey on Low-Resource Scenarios
-Recent advances in generative frameworks have shifted Relation Extraction (RE) toward Triplet Extraction (TE), framing Information Extraction (IE) as an open-schema generation of \textit{(subject, predicate, object)} triplets. This work provides a structured overview of current solutions, research gaps, and future directions for RE and TE in low-resource scenarios. This survey focuses exclusively on low-resource scenarios, defined by limited availability of annotated data and/or the absence of supporting resources such as external vocabularies or ontologies, which are typically leveraged to identify and extract entities and relations. The goal is stated by four key objectives: (1) illustrate the conceptual foundations of RE and TE, including their similarities and differences; (2) formally defining low-resource scenarios and characterizing their key challenges; (3) analyzing State-of-The-Art (SoTA) methods within their efficacy in low-resource settings for solving RE and TE; and finally, (4) future directions of RE/ TE in such settings.
+### From Relation Extraction to Triplet Extraction: A Survey on Low-Resource Scenarios
+Recent advances in generative frameworks have shifted Relation Extraction (RE) toward Triplet Extraction (TE), framing Information Extraction (IE) as an open-schema generation of *(subject, predicate, object)* triplets. This work provides a structured overview of current solutions, research gaps, and future directions for RE and TE in low-resource scenarios. This survey focuses exclusively on low-resource scenarios, defined by limited availability of annotated data and/or the absence of supporting resources such as external vocabularies or ontologies, which are typically leveraged to identify and extract entities and relations. The goal is stated by four key objectives: (1) illustrate the conceptual foundations of RE and TE, including their similarities and differences; (2) formally defining low-resource scenarios and characterizing their key challenges; (3) analyzing State-of-The-Art (SoTA) methods within their efficacy in low-resource settings for solving RE and TE; and finally, (4) future directions of RE/ TE in such settings.
 
-## Bridging the Data Gap: A Comprehensive Review of Datasets for Low-Resource Relation and Triplet Extraction
-Generative frameworks are redefining Information Extraction (IE), recasting it from Relation Extraction (RE) into open-schema Triplet Extraction (TE); the direct generation of \textit{(subject, predicate, object)} triples. This progression, however, presents significant evaluation challenges in low-resource scenarios, where annotated data and supporting resources are scarce. This survey addresses this gap by providing a comprehensive assessment of existing benchmarks for evaluating RE and TE under these constrained conditions. A core contribution is the systematic summary of relevant datasets, ranging from standardized benchmarks to those designed for domain-specific and multilingual challenges. The survey details how these resources are applied and transformed for low-resource settings, including their use in adversarial learning and task-reformulation strategies. By mapping the landscape of available resources and methodologies, this work aims to guide future research toward more robust and reproducible progress in low-resource IE.
+### Bridging the Data Gap: A Comprehensive Review of Datasets for Low-Resource Relation and Triplet Extraction
+Generative frameworks are redefining Information Extraction (IE), recasting it from Relation Extraction (RE) into open-schema Triplet Extraction (TE); the direct generation of *(subject, predicate, object)* triples. This progression, however, presents significant evaluation challenges in low-resource scenarios, where annotated data and supporting resources are scarce. This survey addresses this gap by providing a comprehensive assessment of existing benchmarks for evaluating RE and TE under these constrained conditions. A core contribution is the systematic summary of relevant datasets, ranging from standardized benchmarks to those designed for domain-specific and multilingual challenges. The survey details how these resources are applied and transformed for low-resource settings, including their use in adversarial learning and task-reformulation strategies. By mapping the landscape of available resources and methodologies, this work aims to guide future research toward more robust and reproducible progress in low-resource IE.
+
+
+## Research strategy 
+This semi-systematic literature review follows the methodology outlined by * *, focusing on three key research questions about Relation Extraction (RE) and Triplet Extraction (TE) in low-resource scenarios.
+
+### Search Approach
+- **Strategy A**: Search with two-term queries only in title
+- **Strategy B**: Search terms in title, abstract, and text
+
+### Process Flow
+1. **Initial Search**: Conducted on Scopus and Web of Science using 8 predefined queries combining task terms (Relation Extraction, Triplet Extraction) with scenario terms (low-resource, data scarcity, limited data, and sparse data)
+2. **Duplicate Removal**: Merged results from both platforms and eliminated duplicates
+3. **Filtering**: Applied inclusion/ exclusion criteria through automatic and manual screening
+4. **Validation**: Resolved discrepancies through discussion with supervisors and collaborators
+
+### Data Sources
+- **Primary**: Scopus and Web of Science for core works
+- **Secondary**: Google Scholar, Semantic Scholar, and ACL Anthology for comprehensive coverage
+
+### Selection Criteria
+Studies were selected based on relevance to NLP/ RE/ TE, focus on low-resource scenarios, English language availability, peer-reviewed status, and methodological rigor. The process reduced 283 initial results to 43 final papers through systematic filtering.
+
 
 ## Repository structure
 
-### Folders
-- scopus: this folder cotains the scopus results structurated by each query
-    - scopus_reducido.csv: contains the results for specific queries ('q31','q32','q33','q34','q46','q47','q48','q49','q61','q62','q63','q64')
-    - scopus.csv: contains the results for all queries
-    - scopus.ipynb: extract and aggroup the queries results into one csv. From this notebook emerge scopus.csv and scopus_reducido.csv.
-- web_of_science: this folder cotains the web of science results structurated by each query 
-    - wos_reducido.csv: contains the results for specific queries ('q31','q32','q33','q34','q46','q47','q48','q49','q61','q62','q63','q64')
-    - wos.csv: contains the results for all queries
-    - wos_reducido.ipynb: extract and aggroup the queries results into one csv. From this notebook emerge wos.csv and wos_reducido.csv.
-- others: papers used in the research extracted from Google Scholar, and Semantic Scholar, along with journals and conferences like Association for Computational Linguistics (ACL) Anthology
-- datasets: contains the datasets used in the works analysed from scopus and web of science. 
+### Folders structure
+- **`scopus/`**
+  - `scopus.csv`: Combined results from all Scopus queries.
+  - `scopus_reducido.csv`: A subset of results for specific queries ('q31','q32','q33','q34','q46','q47','q48','q49','q61','q62','q63','q64').
+  - `scopus.ipynb`: Jupyter notebook used to generate the `scopus.csv` and `scopus_reducido.csv` files from the individual query results.
 
-### Files
-- research methodology.xlsx: contains the planification of the work according to the paper's \cite{keele2007guidelines} strategy, described in research methodology section of each paper
-- queries.csv: contains all queries
-- summary.csv: contains the results of the set of queries ('q31','q32','q33','q34','q46','q47','q48','q49','q61','q62','q63','q64') for web of science and scopus without duplicates between platforms
-- summary.xlsx: contains the results of the set of queries ('q31','q32','q33','q34','q46','q47','q48','q49','q61','q62','q63','q64') for web of science and scopus without duplicates between platforms in excel format
-- summary_reduced.xlsx: contains the results of the set of queries ('q31','q32','q33','q34','q46','q47','q48','q49','q61','q62','q63','q64') for web of science and scopus without duplicates between platforms and with the inclusion/ exclusion criteria
-- summary_reduced.csv: contains the results of the set of queries ('q31','q32','q33','q34','q46','q47','q48','q49','q61','q62','q63','q64') for web of science and scopus without duplicates between platforms and with the inclusion/ exclusion criteria in excel format
-- characteristics.csv: common columns in both datasets representing characteristics of papers
+- **`web_of_science/`**
+  - `wos.csv`: Combined results from all Web of Science queries.
+  - `wos_reducido.csv`: A subset of results for specific queries ('q31','q32','q33','q34','q46','q47','q48','q49','q61','q62','q63','q64').
+  - `wos_reducido.ipynb`: Jupyter notebook used to generate the `wos.csv` and `wos_reducido.csv` files.
 
-- seleccion.ipynb: this notebook aggroup the results from both platforms, remove duplicates and applies inclusion/ exclusion criteria. From this notebook emerge summary.csv, summary_reduced.csv, characteristics.csv, summary.xlsx, and summary_reduced.xlsx 
+> These two folders contains subfolders for each query with results for both strategies (A and B) presented as .csv files, along with the corresponding papers in .pdf format.
 
+- **`others/`**
+  - Contains additional papers sourced from Google Scholar, Semantic Scholar, and venues like the Association for Computational Linguistics (ACL) Anthology.
+
+- **`datasets/`**
+  - Contains the datasets used in the works analyzed from the Scopus and Web of Science results.
+
+### Project Files
+
+- **`research_methodology.xlsx`**: Contains the work planning according to the paper's *keele2007guidelines* strategy, as described in the research methodology section of each paper.
+- **`queries.csv`**: Contains all search queries used in the study.
+- **`summary.csv`** & **`summary.xlsx`**: Contain the combined results from Web of Science and Scopus for queries ('q31','q32','q33','q34','q46','q47','q48','q49','q61','q62','q63','q64') after removing duplicates between platforms. Provided in both CSV and Excel formats.
+- **`summary_reduced.csv`** & **`summary_reduced.xlsx`**: Contain the refined results from the same query set after applying inclusion/exclusion criteria and removing duplicates between platforms. Provided in both CSV and Excel formats.
+- **`characteristics.csv`**: Contains the common columns from both datasets that represent characteristics of the analyzed papers.
+
+- **`seleccion.ipynb`**: Jupyter notebook that aggregates results from both platforms, removes duplicates, and applies inclusion/exclusion criteria. This notebook generates: `summary.csv`, `summary_reduced.csv`, `characteristics.csv`, `summary.xlsx`, and `summary_reduced.xlsx`.
+
+> **Development Note:** This code was developed and run in a local environment. The repository contains the code as exported from that environment without subsequent execution here.
 
 
 ## Declaration of competing interest
