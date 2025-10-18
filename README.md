@@ -65,7 +65,7 @@ Studies were selected based on relevance to NLP/ RE/ TE, focus on low-resource s
 
 - **`summary/`**
   - **`summary.csv`** & **`summary.xlsx`**: Contain the combined results from Web of Science and Scopus for queries ('q31','q32','q33','q34','q46','q47','q48','q49','q61','q62','q63','q64') after removing duplicates between platforms. Provided in both CSV and Excel formats.
-  - **`summary_reduced.csv`** & **`summary_reduced.xlsx`**: Contain the refined results from the same query set after applying inclusion/exclusion criteria and removing duplicates between platforms. Provided in both CSV and Excel formats.
+  - **`summary_reduced.csv`** & **`summary_reduced.xlsx`**: Contain the refined results from the same query set after applying inclusion/ exclusion criteria and removing duplicates between platforms. Provided in both CSV and Excel formats.
 
 - **`datasets/`**
   - Contains the datasets used in the works analyzed from the Scopus and Web of Science results.
@@ -137,12 +137,12 @@ The authors declare that they have no known competing financial interests or per
 
 ## Declaration of Generative AI and AI-assisted technologies in the writing process
 
-During the preparation of this work the author(s) used ChatGPT (https://chatgpt.com/) and Deepseek (https://chat.deepseek.com/) for in order to polishing language for clarity, ensuring consistent citation style, structuring data in tables, and assisting in the formatting of scientific visuals. After using this tool/service, the author(s) reviewed and edited the content as needed and take(s) full responsibility for the content of the publication.
+During the preparation of this work the author(s) used ChatGPT (https://chatgpt.com/) and Deepseek (https://chat.deepseek.com/) in order to polishing language for clarity, ensuring consistent citation style, structuring data in tables, and assisting in the formatting of scientific visuals. After using this tool/ service, the author(s) reviewed and edited the content as needed and take(s) full responsibility for the content of the publication.
 
 
 ## Funding
 
-This work has received funding from the INESData project (Infrastructure to Inves- tigate Data Spaces in Distributed Environ- ments at UPM), a project funded under the UNICO I+D CLOUD call by the Ministry for Digital Transformation and the Civil Service, within the framework of the recovery plan PRTR financed by the European Union (NextGenerationEU).
+This work has received funding from the INESData project (Infrastructure to Investigate Data Spaces in Distributed Environments at UPM), a project funded under the UNICO I+D CLOUD call by the Ministry for Digital Transformation and the Civil Service, within the framework of the recovery plan PRTR financed by the European Union (NextGenerationEU).
 
-In addition, this article is part of the TeresIA research project, funded by the European Union's Next GenerationEU/ PRTR funds through the Spanish Ministry of Economy and Digital Transformation ( now the Ministry for Digital Transformation and Public Service).
+In addition, this article is part of the TeresIA research project, funded by the European Union's Next GenerationEU/ PRTR funds through the Spanish Ministry of Economy and Digital Transformation (now the Ministry for Digital Transformation and Public Service).
 
