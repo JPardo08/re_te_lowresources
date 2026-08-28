@@ -87,6 +87,20 @@ No API credentials or internet access are required after dependencies are instal
 | `notebooks/reproducibility/02_web_of_science.ipynb` | WoS aggregation |
 | `notebooks/reproducibility/03_selection.ipynb` | Dual-view Selection + manual/final |
 
+Recommended non-interactive execution (uses the **currently active** Python environment via `python -m nbconvert`, not a `jupyter` binary from PATH):
+
+```bash
+python scripts/execute_notebooks.py
+```
+
+Per-notebook alternative:
+
+```bash
+python -m nbconvert --to notebook --execute notebooks/reproducibility/01_scopus.ipynb
+```
+
+Avoid bare `jupyter nbconvert` when a global Anaconda/`jupyter` install is on PATH; it may not use the project `.venv`.
+
 ## Historical vs corrected Selection
 
 - **Historical reproduction** reconstructs the Paper-1 processing path, including a Web of Science schema-alignment defect that shaped the published automatic funnel (226 → 165 → 159 → 135 → 134).

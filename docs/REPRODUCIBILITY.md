@@ -82,7 +82,24 @@ All scripts call shared functions in `src/re_te_lowresources/`; they do not dupl
 
 ## Notebooks
 
-With the editable package installed:
+With the editable package installed, prefer executing notebooks through the
+**active** interpreter (the project `.venv`), not a global `jupyter` executable
+that may appear earlier on `PATH`:
+
+```bash
+python scripts/execute_notebooks.py
+```
+
+That helper runs all three notebooks via `sys.executable -m nbconvert` and an
+ephemeral kernelspec bound to the current interpreter. Outputs are written to a
+temporary directory and do not overwrite tracked notebooks.
+
+Per-notebook alternative:
+
+```bash
+python -m nbconvert --to notebook --execute \
+  notebooks/reproducibility/01_scopus.ipynb
+```
 
 | Notebook | Content |
 |----------|---------|
@@ -90,13 +107,7 @@ With the editable package installed:
 | `notebooks/reproducibility/02_web_of_science.ipynb` | Frozen WoS aggregation |
 | `notebooks/reproducibility/03_selection.ipynb` | Historical vs corrected Selection, TERL, manual/final |
 
-Execute non-interactively, for example:
-
-```bash
-jupyter nbconvert --to notebook --execute notebooks/reproducibility/01_scopus.ipynb
-```
-
-Select the project virtualenv kernel when running interactively.
+Select the project virtualenv kernel when running interactively in a UI.
 
 ## Tests
 
