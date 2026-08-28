@@ -10,10 +10,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
-
-from re_te_lowresources.web_of_science import (  # noqa: E402
+from re_te_lowresources.web_of_science import (
     CORE_QUERY_ORDER,
     EXPECTED_CORE_ROWS,
     EXPECTED_UNIQUE_ROWS,
@@ -25,6 +22,8 @@ from re_te_lowresources.web_of_science import (  # noqa: E402
     discover_wos_exports,
     reproduce_wos,
 )
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 class WoSReproductionTests(unittest.TestCase):

@@ -1,0 +1,9 @@
+# Minimal pinned dependencies for Paper-1 public reproducibility.
+# Scientific stages (frozen exports only — no Scopus/WoS APIs).
+pandas==2.3.3
+xlrd==2.0.1
+openpyxl==3.1.5
+
+# Notebook execution (01/02/03 reproducibility notebooks via jupyter/nbconvert).
+nbconvert==7.17.1
+ipykernel==7.3.0

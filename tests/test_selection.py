@@ -3,14 +3,10 @@
 from __future__ import annotations
 
 import hashlib
-import sys
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
-
-from re_te_lowresources.selection import (  # noqa: E402
+from re_te_lowresources.selection import (
     ANCIENT_CHINESE_TITLE,
     EXPECTED_CORRECTED,
     EXPECTED_FINAL_CORPUS,
@@ -32,6 +28,8 @@ from re_te_lowresources.selection import (  # noqa: E402
     normalize_title,
     reproduce_selection,
 )
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 class SelectionReproductionTests(unittest.TestCase):

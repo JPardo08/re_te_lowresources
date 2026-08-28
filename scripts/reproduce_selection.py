@@ -6,12 +6,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-SRC = ROOT / "src"
-if str(SRC) not in sys.path:
-    sys.path.insert(0, str(SRC))
-
-from re_te_lowresources.selection import (  # noqa: E402
+from re_te_lowresources.selection import (
     EXPECTED_FINAL_CORPUS,
     EXPECTED_MANUAL_DOUBT,
     EXPECTED_MANUAL_NO,
@@ -20,6 +15,8 @@ from re_te_lowresources.selection import (  # noqa: E402
     format_funnel_arrow,
     reproduce_selection,
 )
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def main() -> int:
@@ -46,12 +43,8 @@ def main() -> int:
     print(PUBLISHED_FINAL_COUNT_WARNING)
     print()
 
-    # Relative write paths for auditability.
-    for label, mapping in (
-        ("historical", result.historical_paths),
-        ("corrected", result.corrected_paths),
-    ):
-        for name, path in mapping.items():
+    for mapping in (result.historical_paths, result.corrected_paths):
+        for path in mapping.values():
             print(f"Wrote: {path.relative_to(ROOT)}")
     for path in (
         result.study_selection_path,

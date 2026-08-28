@@ -2,14 +2,10 @@
 
 from __future__ import annotations
 
-import sys
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
-
-from re_te_lowresources.scopus import (  # noqa: E402
+from re_te_lowresources.scopus import (
     CORE_QUERY_ORDER,
     EXPECTED_CORE_ROWS,
     EXPECTED_UNIQUE_ROWS,
@@ -21,6 +17,8 @@ from re_te_lowresources.scopus import (  # noqa: E402
     discover_scopus_exports,
     reproduce_scopus,
 )
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 class ScopusReproductionTests(unittest.TestCase):
