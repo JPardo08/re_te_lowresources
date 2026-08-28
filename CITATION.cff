@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: >-
+  Please cite the preferred-citation (the published survey) when using this
+  repository or its reproducibility package.
+type: software
+title: >-
+  re_te_lowresources: reproducibility package accompanying
+  From relation extraction to triplet extraction: A survey on low-resource scenarios
+authors:
+  - family-names: Pardo-Ferrera
+    given-names: Joel
+  - family-names: Montiel-Ponsoda
+    given-names: Elena
+  - family-names: Calleja
+    given-names: Pablo
+license: MIT
+preferred-citation:
+  type: article
+  title: "From relation extraction to triplet extraction: A survey on low-resource scenarios"
+  authors:
+    - family-names: Pardo-Ferrera
+      given-names: Joel
+    - family-names: Montiel-Ponsoda
+      given-names: Elena
+    - family-names: Calleja
+      given-names: Pablo
+  journal: "Computer Science Review"
+  volume: "61"
+  year: 2026
+  # Elsevier article number (electronic article identifier)
+  pages: "100954"
+  doi: "10.1016/j.cosrev.2026.100954"
+  url: "https://doi.org/10.1016/j.cosrev.2026.100954"

@@ -1,0 +1,31 @@
+NOTICE
+======
+
+This repository’s original software code and original documentation are
+released under the MIT License (see LICENSE), Copyright (c) 2025
+Joel Pardo-Ferrera, unless a file or directory states otherwise.
+
+Third-party materials included for research reproducibility context are
+NOT relicensed under MIT by virtue of appearing in this repository. In
+particular, the following remain subject to their respective copyright,
+database-producer, publisher, and/or access-agreement terms:
+
+  - PDF copies of publications and related documents under sources/ and
+    elsewhere;
+  - Scopus bibliographic exports under sources/scopus/;
+  - Web of Science bibliographic exports under sources/web_of_science/;
+  - any other externally sourced datasets, figures, or documents.
+
+The publisher PDF of the associated survey article in Computer Science Review
+(DOI 10.1016/j.cosrev.2026.100954) identifies that article as Creative Commons
+Attribution 4.0 (CC BY 4.0). That article-level license is not generalized to
+other files under sources/ or to database exports in this repository.
+
+Presence of third-party materials in this repository does not grant
+redistribution, commercial reuse, or sublicensing rights beyond what the
+applicable upstream terms already allow for the recipient. Users are
+responsible for complying with those upstream terms and with institutional
+database licenses where relevant.
+
+No warranty is made regarding the completeness or sufficiency of this notice
+for any particular jurisdiction or use case.

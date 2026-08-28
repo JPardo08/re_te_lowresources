@@ -1,96 +1,141 @@
-# Relation Extraction (RE) and Triplet Extraction (TE) in Low-resource scenarios. 
+# From Relation Extraction to Triplet Extraction: A Survey on Low-Resource Scenarios
 
-## Abstracts
+This repository accompanies the survey:
 
-### From Relation Extraction to Triplet Extraction: A Survey on Low-Resource Scenarios
+**From Relation Extraction to Triplet Extraction: A Survey on Low-Resource Scenarios**
+
+It provides a **public reproducibility package** for the Paper-1 bibliographic search, automatic filtering, preserved manual screening evidence, and the recoverable analytical corpus.
+
+## Purpose
+
+Reproduce the survey’s literature-selection pipeline from **frozen** Scopus and Web of Science exports, without live database access.
+
+## Reproducibility scope
+
+| In scope | Out of scope |
+|----------|--------------|
+| Platform aggregation (Scopus, WoS) | Live Scopus / Web of Science search |
+| Dual-view Selection (historical + corrected) | Re-running original API queries |
+| Export of preserved manual decisions | Assigning new inclusion decisions |
+| Recoverable 42-study final corpus | Guaranteeing identity with today’s live hit lists |
+
+**Frozen-export boundary.** Current live searches are **not** expected to reproduce the historical hit counts. The reproducibility boundary is the committed exports under `sources/`.
+
+See [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) and [docs/PROVENANCE.md](docs/PROVENANCE.md).
+
+## Repository structure
+
+```
+sources/scopus/                  frozen Scopus exports (q*/{A,B}/scopus.csv)
+sources/web_of_science/          frozen WoS exports (q*/{A,B}/savedrecs.xls)
+sources/others/                  auxiliary PDFs / background material
+data/methodology/                research_methodology.xlsx
+data/automatic/scopus/           generated Scopus core / unique CSVs
+data/automatic/web_of_science/   generated WoS core / unique CSVs
+data/automatic/selection/        historical/ and corrected/ Selection stages
+data/manual/                     exported Study selection / Yes audit
+data/final/                      summary workbook + final_corpus.csv
+src/re_te_lowresources/          shared Python implementation
+scripts/                         CLI entry points
+notebooks/reproducibility/       interactive stage notebooks
+docs/                            reproducibility, provenance, data dictionary
+tests/                           lightweight validation tests
+```
+
+## Quick start
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install -e .
+python scripts/reproduce_all.py
+python scripts/validate_reproduction.py
+```
+
+- Supported Python: **≥ 3.10**
+- Validated environment: **Python 3.14.7**
+
+No API credentials or internet access are required after dependencies are installed.
+
+## Expected checkpoints
+
+| Stage | Checkpoint |
+|-------|------------|
+| Scopus | 204 core → 164 unique |
+| Web of Science | 79 core → 62 unique |
+| Historical Selection | 226 → 165 → 159 → 135 → 134 |
+| Corrected Selection | 226 → 173 → 168 → 140 → 135 |
+| Manual | Yes 47 / No 69 / Doubt 18 (134 candidates) |
+| Final recoverable corpus | **42** unique studies |
+
+## Scripts
+
+| Script | Role |
+|--------|------|
+| `scripts/reproduce_all.py` | Run all stages |
+| `scripts/validate_reproduction.py` | Validate counts and qualitative invariants |
+| `scripts/reproduce_scopus.py` | Scopus only |
+| `scripts/reproduce_wos.py` | Web of Science only |
+| `scripts/reproduce_selection.py` | Selection (historical + corrected) + manual/final exports |
+
+## Interactive notebooks
+
+| Notebook | Stage |
+|----------|-------|
+| `notebooks/reproducibility/01_scopus.ipynb` | Scopus aggregation |
+| `notebooks/reproducibility/02_web_of_science.ipynb` | WoS aggregation |
+| `notebooks/reproducibility/03_selection.ipynb` | Dual-view Selection + manual/final |
+
+## Historical vs corrected Selection
+
+- **Historical reproduction** reconstructs the Paper-1 processing path, including a Web of Science schema-alignment defect that shaped the published automatic funnel (226 → 165 → 159 → 135 → 134).
+- **Corrected pipeline** applies the intended Scopus↔WoS field mapping and reports how automatic candidates differ (226 → 173 → 168 → 140 → 135). It does **not** rewrite historical manual screening.
+
+Details: [docs/PROVENANCE.md](docs/PROVENANCE.md).
+
+## Manual review and final corpus
+
+Preserved decisions (`data/manual/study_selection.csv`): **47 Yes / 69 No / 18 Doubt**.
+
+First-pass Yes records are audited in `data/manual/final_selection.csv` (47 rows; 42 marked in the final corpus).
+
+The recoverable analytical corpus is `data/final/final_corpus.csv` (**42** unique `paper_id`s), in agreement with the Summary table and Data extraction rows that have a populated solution name.
+
+### Published 43 vs preserved 42
+
+The published article reports **43** final studies. Preserved structured analytical artifacts in this repository consistently contain **42** unique Paper IDs. No recoverable 43-entry final list was found here. A hypothesized duplicate-ID explanation of 43→42 was investigated and **not** supported by Yes / Data extraction / Summary evidence. Public reproducibility therefore treats **42** as the canonical recoverable analytical corpus. See [docs/PROVENANCE.md](docs/PROVENANCE.md).
+
+## Abstract (survey)
 
 Recent advances in generative frameworks have shifted Relation Extraction (RE) toward Triplet Extraction (TE), framing Information Extraction (IE) as an open-schema generation of *(subject, predicate, object)* triplets. This work provides a structured overview of current solutions, research gaps, and future directions for RE and TE in low-resource scenarios. This survey focuses exclusively on low-resource scenarios, defined by limited availability of annotated data and/or the absence of supporting resources such as external vocabularies or ontologies, which are typically leveraged to identify and extract entities and relations. The goal is stated by four key objectives: (1) illustrate the conceptual foundations of RE and TE, including their similarities and differences; (2) formally defining low-resource scenarios and characterizing their key challenges; (3) analyzing State-of-The-Art (SoTA) methods within their efficacy in low-resource settings for solving RE and TE; and finally, (4) future directions of RE/ TE in such settings.
 
 ## Keywords
 
-- Information Extraction 
-- Relation Extraction 
+- Information Extraction
+- Relation Extraction
 - Triplet Extraction
 - Low-resources
 
+## Citation
 
-## Research strategy 
+Please cite the associated survey:
 
-This semi-systematic literature review follows the methodology outlined by *Guidelines for performing systematic literature reviews in software engineering*[^1], focusing on three key research questions about Relation Extraction (RE) and Triplet Extraction (TE) in low-resource scenarios.
+Pardo-Ferrera, J., Montiel-Ponsoda, E., & Calleja, P. (2026). From relation extraction to triplet extraction: A survey on low-resource scenarios. *Computer Science Review*, *61*, Article 100954. https://doi.org/10.1016/j.cosrev.2026.100954
 
-### Search Approach
+Machine-readable citation metadata: [CITATION.cff](CITATION.cff).
 
-- **Strategy A**: Search with two-term queries only in title
-- **Strategy B**: Search terms in title, abstract, and text
+## License and third-party material
 
-### Process Flow
+Original repository code and documentation are released under the [MIT License](LICENSE) (Copyright © 2025 Joel Pardo-Ferrera), unless stated otherwise.
 
-1. **Initial Search**: Conducted on Scopus and Web of Science using 8 predefined queries combining task terms (Relation Extraction, Triplet Extraction) with scenario terms (low-resource, data scarcity, limited data, and sparse data)
-2. **Duplicate Removal**: Merged results from both platforms and eliminated duplicates
-3. **Filtering**: Applied inclusion/ exclusion criteria through automatic and manual screening
-4. **Validation**: Resolved discrepancies through discussion with supervisors and collaborators
+Frozen database exports, PDFs, and other third-party materials remain subject to their own copyright, database, and access terms and are **not** relicensed under MIT. See [NOTICE](NOTICE).
 
-### Data Sources
+## Further documentation
 
-- **Primary**: Scopus and Web of Science for core works
-- **Secondary**: Google Scholar, Semantic Scholar, and ACL Anthology for comprehensive coverage
-
-### Selection Criteria
-
-Studies were selected based on relevance to NLP/ RE/ TE, focus on low-resource scenarios, English language availability, peer-reviewed status, and methodological rigor. The process reduced 283 initial results to 43 final papers through systematic filtering.
-
-
-## Repository structure
-
-### Folder structure
-
-- **`scopus/`**
-  - Contains the results of the systematic search on Scopus.
-  - Per-query subfolders (e.g., `q1/`, `q2/`, `q3/`, `q31/`, `q32/`, `q33/`, `q34/`, `q16/`, `q17/`, `q46/`, `q47/`, `q62/`) group the results for each query and strategy (A and/or B). These subfolders include `A/` and `B/` folders with their corresponding `scopus.csv` files and associated papers in `.pdf` format.
-  - Aggregate files:
-    - `scopus.csv`: Combined results from all Scopus queries.
-    - `scopus_reducido.csv`: Reduced subset of Scopus results for a subset of queries after preliminary filtering.
-  - `scopus.ipynb`: Jupyter notebook used to generate, clean and aggregate the Scopus results.
-
-- **`web_of_science/`**
-  - Contains the results of the systematic search on Web of Science.
-  - Per-query subfolders (e.g., `q1/`, `q2/`, `q3/`, `q31/`, `q32/`, `q33/`, `q34/`, `q16/`, `q17/`, `q46/`, `q47/`, `q62/`) group the results for each query and strategy (A and/or B). These subfolders include `A/` and `B/` folders with their corresponding `savedrecs.xls` files.
-  - Aggregate files:
-    - `wos.csv`: Combined results from all Web of Science queries.
-    - `wos_reducido.csv`: Reduced subset of Web of Science results for a subset of queries after preliminary filtering.
-  - `wos.ipynb`: Jupyter notebook used to generate, clean and aggregate the Web of Science results.
-
-> The `scopus/` and `web_of_science/` folders both contain per-query subfolders with results for the two search strategies (A and B), the original exports (`.csv` or `.xls`) and the corresponding papers in `.pdf` format when available.
-
-- **`relation/`**
-  - Contains the materials related to the Relation Extraction (RE) part of the survey.
-  - `relation.xlsx`: Spreadsheet with the curated and annotated information about RE works.
-  - `methods/`: Subfolders grouping papers by methodological families (e.g., `DL/`, `Language/`, `ML/`, `Rule-based/`), each containing the corresponding papers in `.pdf` format.
-  - `surveys/`: Subfolders with additional survey papers retrieved from Google Scholar and Semantic Scholar (`google and scholar/`, `semantic scholar/`) and further organized by iteration (`it1/`, `it2/`).
-
-- **`triplet/`**
-  - Contains the materials related to the Triplet Extraction (TE) part of the survey.
-  - `triplet.xlsx`: Spreadsheet with the curated and annotated information about TE works.
-  - `methods/`: Subfolders with papers focused on triplet extraction methods (e.g., `language/` with LLM-based and other language-centric approaches) in `.pdf` format.
-
-- **`datasets/`**
-  - Contains documentation for the datasets used or referenced in the analyzed works (e.g., `conll04.pdf`, `docred.pdf`, `nyt.pdf`, `nyt2.pdf`, `re_tacred.pdf`), typically in `.pdf` format.
-
-- **`others/`**
-  - Contains additional background and complementary literature not directly part of the primary Scopus/Web of Science search results, such as works on LLMs, information extraction, data augmentation, knowledge graphs, and related topics (`gpt*.pdf`, `llama*.pdf`, `rag.pdf`, `uie.pdf`, etc.).
-
-- **`summary/`**
-  - **`summary_reduced.xlsx`**: Refined combined summary of selected works from Scopus and Web of Science after deduplication and application of the inclusion/exclusion criteria.
-
-### Project files
-
-- **`research_methodology.xlsx`**: Contains the work planning according to the paper *Guidelines for performing systematic literature reviews in software engineering*[^1], as described in the research methodology section.
-- **`seleccion.ipynb`**: Jupyter notebook that operates over the Scopus and Web of Science exports to merge results, remove duplicates, and apply inclusion/exclusion criteria. In the current repository state, it primarily relates to the aggregate files in `scopus/`, `web_of_science/` and the refined summary stored in `summary/`.
-
-> **Development Note:** This code was developed and run in a local environment. The repository contains the code as exported from that environment without subsequent execution here. The output elements can be in other paths than the ones specified in the code.
-
-[^1]: Keele, S. (2007). Guidelines for performing systematic literature reviews in software engineering (Vol. 5). Technical report, ver. 2.3 ebse technical report. ebse.
-
+- [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) — clean-clone workflow and scripts
+- [docs/PROVENANCE.md](docs/PROVENANCE.md) — scientific history of the funnel
+- [docs/DATA_DICTIONARY.md](docs/DATA_DICTIONARY.md) — public data artifacts and key columns
 
 ## Works explored for the analysis
 
@@ -139,6 +184,8 @@ Studies were selected based on relevance to NLP/ RE/ TE, focus on low-resource s
 | zheng | *Making LLMs as Fine-Grained Relation Extraction Data Augmentor* | Zheng Y.; Ke W.; Liu Q.; Yang Y.; Zhao R.; Feng D.; Zhang J.; Fang Z. | 2024 | IJCAI 2024 |
 | zhou2 | *Continual Contrastive Finetuning Improves Low-Resource Relation Extraction* | Zhou W.; Zhang S.; Naumann T.; Chen M.; Poon H. | 2023 | ACL Annual Meeting |
 
+The table above enumerates the **42** recoverable analytical studies matching `data/final/final_corpus.csv` (Paper IDs agree exactly). The published article reports **43**; see [Published 43 vs preserved 42](#published-43-vs-preserved-42).
+
 
 ## Declaration of competing interest
 
@@ -149,10 +196,8 @@ The authors declare that they have no known competing financial interests or per
 
 During the preparation of this work the author(s) used ChatGPT (https://chatgpt.com/) and Deepseek (https://chat.deepseek.com/) in order to polish language for clarity, ensuring consistent citation style, structuring data in tables, and assisting in the formatting of scientific visuals. After using this tool/ service, the author(s) reviewed and edited the content as needed and take(s) full responsibility for the content of the publication.
 
-
 ## Funding
 
 This work has received funding from the INESData project (Infrastructure to Investigate Data Spaces in Distributed Environments at UPM), a project funded under the UNICO I+D CLOUD call by the Ministry for Digital Transformation and the Civil Service, within the framework of the recovery plan PRTR financed by the European Union (NextGenerationEU).
 
 In addition, this article is part of the TeresIA research project, funded by the European Union's Next GenerationEU/ PRTR funds through the Spanish Ministry of Economy and Digital Transformation (now the Ministry for Digital Transformation and Public Service).
-
