@@ -30,6 +30,12 @@ from re_te_lowresources.selection import (
 )
 from re_te_lowresources.scopus import EXPECTED_CORE_ROWS as SCOPUS_CORE
 from re_te_lowresources.scopus import EXPECTED_UNIQUE_ROWS as SCOPUS_UNIQUE
+from re_te_lowresources.statistics import (
+    PROCESS_STATISTICS_REL,
+    compute_process_statistics,
+    expected_process_statistics,
+    statistics_lookup,
+)
 from re_te_lowresources.web_of_science import EXPECTED_CORE_ROWS as WOS_CORE
 from re_te_lowresources.web_of_science import EXPECTED_UNIQUE_ROWS as WOS_UNIQUE
 
@@ -66,6 +72,7 @@ def main() -> int:
         ROOT / "data/manual/study_selection.csv",
         ROOT / "data/manual/final_selection.csv",
         ROOT / "data/final/final_corpus.csv",
+        ROOT / PROCESS_STATISTICS_REL,
     ]
     for path in expected_files:
         _require(path, errors)
@@ -168,6 +175,45 @@ def main() -> int:
             _fail(f"final corpus: expected {EXPECTED_FINAL_CORPUS}, got {len(corpus)}", errors)
         if corpus["paper_id"].nunique() != len(corpus):
             _fail("final_corpus paper_id values are not unique", errors)
+
+    # --- Process statistics (read-only: compare stored vs recomputed) ---
+    stats_path = ROOT / PROCESS_STATISTICS_REL
+    if stats_path.is_file():
+        stored = pd.read_csv(stats_path)
+        computed = compute_process_statistics(ROOT)
+        expected = expected_process_statistics()
+        for (stage, metric), exp_count in expected.items():
+            try:
+                got = statistics_lookup(stored, stage, metric)
+            except KeyError as exc:
+                _fail(str(exc), errors)
+                continue
+            if got["count"] != exp_count:
+                _fail(
+                    f"stats {stage}/{metric}: expected {exp_count}, got {got['count']}",
+                    errors,
+                )
+        for row in computed:
+            try:
+                got = statistics_lookup(stored, row.stage, row.metric)
+            except KeyError as exc:
+                _fail(str(exc), errors)
+                continue
+            if got["count"] != row.count:
+                _fail(
+                    f"stats {row.stage}/{row.metric} stored {got['count']} "
+                    f"!= computed {row.count}",
+                    errors,
+                )
+            if row.percentage is not None:
+                if got["percentage"] is None or abs(
+                    float(got["percentage"]) - float(row.percentage)
+                ) > 1e-9:
+                    _fail(
+                        f"stats {row.stage}/{row.metric} percentage mismatch",
+                        errors,
+                    )
+        print(f"Process statistics: {stats_path.relative_to(ROOT)} OK")
 
     # --- Qualitative invariants ---
     hist_proc = ROOT / "data/automatic/selection/historical/proceedings_filtered.csv"

@@ -51,6 +51,8 @@ def main() -> int:
         f"Doubt {EXPECTED_MANUAL_DOUBT}"
     )
     print(f"Final corpus: {EXPECTED_FINAL_CORPUS}")
+    if selection.process_statistics_path is not None:
+        print(f"Process statistics: {selection.process_statistics_path.relative_to(ROOT)}")
     print(f"WARNING: {PUBLISHED_FINAL_COUNT_WARNING}")
     print("PASS")
     return 0

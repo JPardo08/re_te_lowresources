@@ -185,13 +185,14 @@ def write_wos_outputs(
     wos_unique: pd.DataFrame,
     output_dir: Path,
 ) -> tuple[Path, Path]:
-    """Write deterministic CSV checkpoints (no pandas index column)."""
+    """Write deterministic CSV checkpoints (skip rewrite when bytes unchanged)."""
+    from re_te_lowresources.io_util import write_dataframe_csv_if_changed
+
     output_dir = Path(output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
-    core_path = output_dir / OUTPUT_CORE_NAME
-    unique_path = output_dir / OUTPUT_UNIQUE_NAME
-    wos_core.to_csv(core_path, index=False)
-    wos_unique.to_csv(unique_path, index=False)
+    core_path = write_dataframe_csv_if_changed(wos_core, output_dir / OUTPUT_CORE_NAME)
+    unique_path = write_dataframe_csv_if_changed(
+        wos_unique, output_dir / OUTPUT_UNIQUE_NAME
+    )
     return core_path, unique_path
 
 

@@ -1,0 +1,20 @@
+stage,metric,count,denominator,percentage,notes
+platform_scopus,core,204,,,
+platform_scopus,unique,164,,,
+platform_wos,core,79,,,
+platform_wos,unique,62,,,
+selection_historical,merged,226,,,
+selection_historical,unique,165,,,
+selection_historical,english,159,,,
+selection_historical,author_metadata_filtered,135,,,required author metadata present (proceedings-like shell filter)
+selection_historical,normalized_candidates,134,,,normalized-title collapse (TERL dual bibliographic rows)
+selection_corrected,merged,226,,,
+selection_corrected,unique,173,,,
+selection_corrected,english,168,,,
+selection_corrected,author_metadata_filtered,140,,,required author metadata present
+selection_corrected,normalized_candidates,135,,,normalized-title collapse
+manual,candidates,134,,,
+manual,yes,47,134,35.074626865672,among historical manual candidates
+manual,no,69,134,51.492537313433,among historical manual candidates
+manual,doubt,18,134,13.432835820896,among historical manual candidates
+final,recoverable_corpus,42,,,canonical recoverable analytical corpus (published narrative reports 43)

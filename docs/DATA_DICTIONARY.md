@@ -38,7 +38,7 @@ Same core query families as Scopus.
 
 ### `sources/others/`
 
-Auxiliary PDFs and background literature (methods, surveys, datasets, related work). Not inputs to the automatic Selection funnel. Subject to third-party copyright (see `NOTICE`).
+Auxiliary / background research PDFs (methods surveys, related datasets, exploratory reading). **Not** inputs to the automatic Selection funnel. Subject to third-party copyright (see `NOTICE`). Retained for scientific context in the public research package.
 
 ---
 
@@ -121,6 +121,9 @@ Exported from `data/final/summary_reduced.xlsx` (Excel is not modified).
 |----------|------|--------------:|------|
 | `summary_reduced.xlsx` | Preserved workbook | — | Study selection, Data extraction, Summary table, etc. |
 | `final_corpus.csv` | Generated export | 42 | Recoverable analytical corpus (`paper_id` unique) |
+| `process_statistics.csv` | Derived | long-format | Counts/percentages from platform, Selection, manual, and final artifacts |
+
+`process_statistics.csv` is produced by `re_te_lowresources.statistics` during Selection reproduction. It is not an independent annotation source. It does **not** invent Free or Peer-review stages.
 
 ---
 

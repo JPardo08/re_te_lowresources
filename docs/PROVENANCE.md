@@ -102,6 +102,13 @@ Factually, from repository evidence:
 
 Therefore public reproducibility uses **42** as the **canonical recoverable analytical corpus**. This documentation records the discrepancy; it does not designate a formal publisher erratum.
 
+## Related follow-up work
+
+A subsequent dataset-centric analysis (Paper 2) is maintained separately at
+https://github.com/JPardo08/re_te_lowresources_datasets.
+That package freezes usage-paper inputs derived from this survey’s Yes set; it
+does **not** share a runtime dependency with this repository.
+
 ## Related outputs
 
 | Artifact | Role |

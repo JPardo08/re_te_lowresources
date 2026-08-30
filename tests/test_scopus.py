@@ -53,6 +53,7 @@ class ScopusReproductionTests(unittest.TestCase):
         self.assertGreaterEqual(len(terl), 2)
 
     def test_reproduce_writes_named_outputs(self) -> None:
+        # write=True is safe: outputs are rewritten only when bytes change.
         result = reproduce_scopus(ROOT, validate=True, write=True)
         self.assertEqual(result.core_path.name, OUTPUT_CORE_NAME)
         self.assertEqual(result.unique_path.name, OUTPUT_UNIQUE_NAME)

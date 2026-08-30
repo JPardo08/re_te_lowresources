@@ -433,12 +433,12 @@ def build_corrected_funnel(
 
 
 def write_funnel_outputs(funnel: FunnelFrames, output_dir: Path) -> dict[str, Path]:
+    from re_te_lowresources.io_util import write_dataframe_csv_if_changed
+
     output_dir = Path(output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
     written: dict[str, Path] = {}
     for name, frame in funnel.as_dict().items():
-        path = output_dir / f"{name}.csv"
-        frame.to_csv(path, index=False)
+        path = write_dataframe_csv_if_changed(frame, output_dir / f"{name}.csv")
         written[name] = path
     return written
 
@@ -556,9 +556,9 @@ def export_study_selection_csv(
     out = df[keep].copy()
     # paper_id is not native on this sheet; leave empty placeholder for schema stability.
     out.insert(0, "paper_id", pd.NA)
-    output_path = Path(output_path)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    out.to_csv(output_path, index=False)
+    from re_te_lowresources.io_util import write_dataframe_csv_if_changed
+
+    write_dataframe_csv_if_changed(out, Path(output_path))
     return out
 
 
@@ -620,9 +620,9 @@ def export_final_selection_csv(
     )
     # Deterministic order by paper_id.
     out = out.sort_values("paper_id").reset_index(drop=True)
-    output_path = Path(output_path)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    out.to_csv(output_path, index=False)
+    from re_te_lowresources.io_util import write_dataframe_csv_if_changed
+
+    write_dataframe_csv_if_changed(out, Path(output_path))
     return out
 
 
@@ -664,9 +664,9 @@ def export_final_corpus_csv(
         }
     )
     out = out.sort_values("paper_id").reset_index(drop=True)
-    output_path = Path(output_path)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    out.to_csv(output_path, index=False)
+    from re_te_lowresources.io_util import write_dataframe_csv_if_changed
+
+    write_dataframe_csv_if_changed(out, Path(output_path))
     return out
 
 
@@ -679,6 +679,7 @@ class SelectionReproductionResult:
     study_selection_path: Path | None = None
     final_selection_path: Path | None = None
     final_corpus_path: Path | None = None
+    process_statistics_path: Path | None = None
     published_final_warning: str = PUBLISHED_FINAL_COUNT_WARNING
 
 
@@ -710,7 +711,7 @@ def reproduce_selection(
 
     hist_paths: dict[str, Path] = {}
     corr_paths: dict[str, Path] = {}
-    study_path = final_sel_path = corpus_path = None
+    study_path = final_sel_path = corpus_path = stats_path = None
 
     if write:
         hist_paths = write_funnel_outputs(historical, paths.historical_dir)
@@ -721,6 +722,9 @@ def reproduce_selection(
         export_study_selection_csv(paths.summary_xlsx, study_path)
         export_final_selection_csv(paths.summary_xlsx, final_sel_path)
         export_final_corpus_csv(paths.summary_xlsx, corpus_path)
+        from re_te_lowresources.statistics import write_process_statistics
+
+        stats_path = write_process_statistics(paths.root)
 
     return SelectionReproductionResult(
         historical=historical,
@@ -730,6 +734,7 @@ def reproduce_selection(
         study_selection_path=study_path,
         final_selection_path=final_sel_path,
         final_corpus_path=corpus_path,
+        process_statistics_path=stats_path,
     )
 
 

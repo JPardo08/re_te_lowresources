@@ -25,11 +25,12 @@ class GlobalReproductionInterfaceTests(unittest.TestCase):
 
     def test_package_importable(self) -> None:
         import re_te_lowresources
-        from re_te_lowresources import scopus, selection, web_of_science
+        from re_te_lowresources import scopus, selection, statistics, web_of_science
 
         self.assertTrue(hasattr(scopus, "reproduce_scopus"))
         self.assertTrue(hasattr(web_of_science, "reproduce_wos"))
         self.assertTrue(hasattr(selection, "reproduce_selection"))
+        self.assertTrue(hasattr(statistics, "compute_process_statistics"))
         self.assertEqual(re_te_lowresources.__version__, "0.1.0")
 
 
